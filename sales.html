@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" id="htmlRoot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TK-Stock | Sales Management</title>
+    <link rel="stylesheet" href="CSS/sales.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="logo-container">
+            <i class="fas fa-chart-line logo-icon"></i>
+            <h1 class="brand-name">TK-Stock</h1>
+        </div>
+        
+        <div class="header-controls">
+            <div class="language-selector">
+                <button class="lang-btn active" onclick="setLanguage('en')" data-i18n="english">EN</button>
+                <button class="lang-btn" onclick="setLanguage('am')" data-i18n="amharic">አማ</button>
+            </div>
+            
+            <div class="user-profile">
+                <i class="fas fa-user-circle user-icon"></i>
+                <span id="username">Admin</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span data-i18n="dashboard">Dashboard</span>
+            </a>
+            <a href="inventory.html" class="nav-item">
+                <i class="fas fa-boxes"></i>
+                <span data-i18n="inventory">Inventory</span>
+            </a>
+            <a href="sales.html" class="nav-item active">
+                <i class="fas fa-shopping-cart"></i>
+                <span data-i18n="sales">Sales</span>
+            </a>
+            <a href="reports.html" class="nav-item">
+                <i class="fas fa-chart-bar"></i>
+                <span data-i18n="reports">Reports</span>
+            </a>
+            <a href="settings.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span data-i18n="settings">Settings</span>
+            </a>
+            
+            <!-- Logout at bottom -->
+            <a href="#" class="nav-item logout-item" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span data-i18n="logout">Logout</span>
+            </a>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="header-title">
+                    <h2 data-i18n="salesTitle">Sales Management</h2>
+                    <p data-i18n="salesSubtitle">Process sales, manage transactions, and track revenue</p>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="new-sale-btn" id="newSaleBtn">
+                        <i class="fas fa-plus"></i>
+                        <span data-i18n="newSale">New Sale</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sales Stats -->
+            <div class="sales-stats">
+                <div class="stat-card">
+                    <div class="stat-icon today">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 data-i18n="todaySales">Today's Sales</h3>
+                        <p class="stat-number">$<span id="todaySales">2,845</span></p>
+                        <p class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> <span data-i18n="vsYesterday">vs yesterday</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon week">
+                        <i class="fas fa-calendar-week"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 data-i18n="weeklySales">Weekly Sales</h3>
+                        <p class="stat-number">$<span id="weeklySales">15,230</span></p>
+                        <p class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> <span data-i18n="vsLastWeek">vs last week</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon transactions">
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 data-i18n="totalTransactions">Total Transactions</h3>
+                        <p class="stat-number" id="totalTransactions">42</p>
+                        <p class="stat-change">
+                            <i class="fas fa-chart-line"></i> <span data-i18n="thisMonth">this month</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon average">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 data-i18n="avgTransaction">Avg. Transaction</h3>
+                        <p class="stat-number">$<span id="avgTransaction">67.74</span></p>
+                        <p class="stat-change negative">
+                            <i class="fas fa-arrow-down"></i> <span data-i18n="trend">trend</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Sale Form (Initially Hidden) -->
+            <div class="sale-form-container" id="saleFormContainer" style="display: none;">
+                <div class="form-header">
+                    <h3 data-i18n="newSaleForm">New Sale Transaction</h3>
+                    <button class="close-form" id="closeFormBtn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="sale-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerName" data-i18n="customerName">Customer Name</label>
+                            <input type="text" id="customerName" placeholder="Enter customer name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customerPhone" data-i18n="customerPhone">Phone Number</label>
+                            <input type="tel" id="customerPhone" placeholder="Enter phone number">
+                        </div>
+                    </div>
+                    
+                    <div class="products-section">
+                        <h4 data-i18n="products">Products</h4>
+                        <div class="products-list" id="productsList">
+                            <!-- Products will be added here -->
+                        </div>
+                        
+                        <button type="button" class="add-product-btn" id="addProductToSaleBtn">
+                            <i class="fas fa-plus-circle"></i>
+                            <span data-i18n="addProduct">Add Product</span>
+                        </button>
+                    </div>
+                    
+                    <div class="sale-summary">
+                        <div class="summary-row">
+                            <span data-i18n="subtotal">Subtotal</span>
+                            <span>$<span id="subtotal">0.00</span></span>
+                        </div>
+                        <div class="summary-row">
+                            <span data-i18n="tax">Tax (15%)</span>
+                            <span>$<span id="taxAmount">0.00</span></span>
+                        </div>
+                        <div class="summary-row total">
+                            <span data-i18n="total">Total Amount</span>
+                            <span class="total-amount">$<span id="totalAmount">0.00</span></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelSaleBtn" data-i18n="cancel">Cancel</button>
+                        <button type="button" class="complete-btn" id="completeSaleBtn" data-i18n="completeSale">Complete Sale</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Transactions -->
+            <div class="sales-section">
+                <div class="section-header">
+                    <h3 data-i18n="recentTransactions">Recent Transactions</h3>
+                    <div class="table-controls">
+                        <select id="dateFilter" class="filter-select">
+                            <option value="today" data-i18n="today">Today</option>
+                            <option value="week" data-i18n="thisWeek">This Week</option>
+                            <option value="month" selected data-i18n="thisMonth">This Month</option>
+                            <option value="all" data-i18n="allTime">All Time</option>
+                        </select>
+                        <button class="print-btn" id="printBtn">
+                            <i class="fas fa-print"></i>
+                            <span data-i18n="print">Print</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="sales-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="invoice">Invoice #</th>
+                                <th data-i18n="customer">Customer</th>
+                                <th data-i18n="dateTime">Date & Time</th>
+                                <th data-i18n="items">Items</th>
+                                <th data-i18n="total">Total</th>
+                                <th data-i18n="payment">Payment</th>
+                                <th data-i18n="actions">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsTable">
+                            <!-- Transactions will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Top Selling Products -->
+            <div class="sales-section">
+                <div class="section-header">
+                    <h3 data-i18n="topProducts">Top Selling Products</h3>
+                    <a href="inventory.html" class="view-all" data-i18n="viewInventory">View Inventory</a>
+                </div>
+                
+                <div class="products-grid" id="topProductsGrid">
+                    <!-- Top products will be loaded here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>© 2025 TK-Stock. <span data-i18n="allRights">All rights reserved</span>.</p>
+        <p class="version">
+            <i class="fas fa-code"></i>
+            <span data-i18n="universityProject">Internet Programming Final Project - INSY3081</span>
+        </p>
+        <p class="developers" data-i18n="developers">Developed by: Tsegay & Kasa</p>
+    </footer>
+
+    <script src="JS/sales.js"></script>
+</body>
+</html>

@@ -261,23 +261,6 @@ function orderProduct(productName) {
 
 // Setup event listeners
 function setupEventListeners() {
-    // Navigation items
-    document.querySelectorAll('.nav-item').forEach(item => {
-        if (!item.classList.contains('logout-item')) {
-            item.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-
-                const page = this.dataset.page;
-                if (currentLang === 'en') {
-                    alert(`Navigating to ${page} page...`);
-                } else {
-                    alert(`ወደ ${page} ገጽ በመሄድ ላይ...`);
-                }
-            });
-        }
-    });
     // Logout function
     function logout() {
         const confirmMessage = currentLang === 'en'

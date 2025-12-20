@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" id="htmlRoot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TK-Stock | Inventory Management</title>
+    <link rel="stylesheet" href="CSS/inventory.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="logo-container">
+            <i class="fas fa-chart-line logo-icon"></i>
+            <h1 class="brand-name">TK-Stock</h1>
+        </div>
+        
+        <div class="header-controls">
+            <div class="language-selector">
+                <button class="lang-btn active" onclick="setLanguage('en')" data-i18n="english">EN</button>
+                <button class="lang-btn" onclick="setLanguage('am')" data-i18n="amharic">አማ</button>
+            </div>
+            
+            <div class="user-profile">
+                <i class="fas fa-user-circle user-icon"></i>
+                <span id="username">Admin</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="dashboard-container">
+        <!-- In inventory.html sidebar: -->
+        <nav class="sidebar">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span data-i18n="dashboard">Dashboard</span>
+            </a>
+            <a href="inventory.html" class="nav-item active">
+                <i class="fas fa-boxes"></i>
+                <span data-i18n="inventory">Inventory</span>
+            </a>
+            <a href="sales.html" class="nav-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span data-i18n="sales">Sales</span>
+            </a>
+            <a href="reports.html" class="nav-item">
+                <i class="fas fa-chart-bar"></i>
+                <span data-i18n="reports">Reports</span>
+            </a>
+            <a href="settings.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span data-i18n="settings">Settings</span>
+            </a>
+            
+            <!-- Logout at bottom -->
+            <a href="#" class="nav-item logout-item" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span data-i18n="logout">Logout</span>
+            </a>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="header-title">
+                    <h2 data-i18n="inventoryTitle">Product Inventory</h2>
+                    <p data-i18n="inventorySubtitle">Manage all your products and stock levels</p>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search products..." data-i18n-placeholder="searchPlaceholder">
+                    </div>
+                    <button class="add-product-btn" id="addProductBtn">
+                        <i class="fas fa-plus"></i>
+                        <span data-i18n="addProduct">Add New Product</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Inventory Stats -->
+            <div class="inventory-stats">
+                <div class="stat-card">
+                    <div class="stat-icon total">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 data-i18n="totalProducts">Total Products</h3>
+                        <p class="stat-number" id="totalProductsCount">0</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon low">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 data-i18n="lowStock">Low Stock</h3>
+                        <p class="stat-number" id="lowStockCount">0</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon out">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 data-i18n="outOfStock">Out of Stock</h3>
+                        <p class="stat-number" id="outOfStockCount">0</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon value">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 data-i18n="totalValue">Total Value</h3>
+                        <p class="stat-number">$<span id="totalValue">0</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Table -->
+            <div class="inventory-section">
+                <div class="section-header">
+                    <h3 data-i18n="allProducts">All Products</h3>
+                    <div class="table-controls">
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="all" data-i18n="allCategories">All Categories</option>
+                            <option value="grains" data-i18n="grains">Grains</option>
+                            <option value="beverages" data-i18n="beverages">Beverages</option>
+                            <option value="spices" data-i18n="spices">Spices</option>
+                            <option value="clothing" data-i18n="clothing">Clothing</option>
+                            <option value="other" data-i18n="other">Other</option>
+                        </select>
+                        <button class="export-btn" id="exportBtn">
+                            <i class="fas fa-download"></i>
+                            <span data-i18n="export">Export</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="product">Product</th>
+                                <th data-i18n="category">Category</th>
+                                <th data-i18n="price">Price</th>
+                                <th data-i18n="stock">Stock</th>
+                                <th data-i18n="status">Status</th>
+                                <th data-i18n="value">Value</th>
+                                <th data-i18n="actions">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTable">
+                            <!-- Products will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Featured Products (Image Gallery) -->
+            <div class="inventory-section">
+                <div class="section-header">
+                    <h3 data-i18n="featuredProducts">Featured Products</h3>
+                    <a href="#" class="view-all" data-i18n="viewAll">View All</a>
+                </div>
+                
+                <div class="products-grid" id="featuredProducts">
+                    <!-- Featured products with images will be loaded here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>© 2025 TK-Stock. <span data-i18n="allRights">All rights reserved</span>.</p>
+        <p class="version">
+            <i class="fas fa-code"></i>
+            <span data-i18n="universityProject">Internet Programming Final Project - INSY3081</span>
+        </p>
+        <p class="developers" data-i18n="developers">Developed by: Tsegay & Kasa</p>
+    </footer>
+
+    <!-- Add Product Modal (Hidden by default) -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle" data-i18n="addProduct">Add New Product</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <form id="productForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productName" data-i18n="productName">Product Name</label>
+                            <input type="text" id="productName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productCategory" data-i18n="category">Category</label>
+                            <select id="productCategory" required>
+                                <option value="" data-i18n="selectCategory">Select Category</option>
+                                <option value="grains" data-i18n="grains">Grains</option>
+                                <option value="beverages" data-i18n="beverages">Beverages</option>
+                                <option value="spices" data-i18n="spices">Spices</option>
+                                <option value="clothing" data-i18n="clothing">Clothing</option>
+                                <option value="other" data-i18n="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="productPrice" data-i18n="price">Price ($)</label>
+                            <input type="number" id="productPrice" min="0" step="0.01" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productStock" data-i18n="stockQuantity">Stock Quantity</label>
+                            <input type="number" id="productStock" min="0" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="minStock" data-i18n="minStock">Minimum Stock Level</label>
+                            <input type="number" id="minStock" min="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productImage" data-i18n="imageUrl">Image URL (Optional)</label>
+                            <input type="text" id="productImage" placeholder="https://example.com/image.jpg">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productDescription" data-i18n="description">Description</label>
+                        <textarea id="productDescription" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelBtn" data-i18n="cancel">Cancel</button>
+                        <button type="submit" class="save-btn" id="saveBtn" data-i18n="saveProduct">Save Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/inventory.js"></script>
+</body>
+</html>
