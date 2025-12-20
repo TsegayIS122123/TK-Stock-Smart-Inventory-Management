@@ -123,6 +123,8 @@ loginForm.addEventListener('submit', function (event) {
     loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
     loginBtn.disabled = true;
 
+    // In login.js, update the form submission timeout function:
+
     // Simulate login process
     setTimeout(() => {
         // For this project demo, accept any valid email/password
@@ -132,7 +134,15 @@ loginForm.addEventListener('submit', function (event) {
         if (rememberCheckbox.checked) {
             localStorage.setItem('ethiostock_user', JSON.stringify({
                 email: email,
-                lastLogin: new Date().toISOString()
+                lastLogin: new Date().toISOString(),
+                isLoggedIn: true  // Add this flag
+            }));
+        } else {
+            // Still store for current session
+            localStorage.setItem('ethiostock_user', JSON.stringify({
+                email: email,
+                lastLogin: new Date().toISOString(),
+                isLoggedIn: true
             }));
         }
 
@@ -140,8 +150,8 @@ loginForm.addEventListener('submit', function (event) {
         loginBtn.innerHTML = originalText;
         loginBtn.disabled = false;
 
-        // Redirect to main application
-        window.location.href = 'dashboard.html';
+        // Redirect to main application - Make sure this is index.html
+        window.location.href = 'index.html';
 
     }, 1500);
 });
