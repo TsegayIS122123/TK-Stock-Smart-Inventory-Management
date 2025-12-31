@@ -27,77 +27,26 @@ function initUserInfo() {
 // Language management
 let currentLang = localStorage.getItem('ethiostock_language') || 'en';
 
-// Default settings
-const defaultSettings = {
-    business: {
-        name: '',
-        type: 'retail',
-        phone: '',
-        email: '',
-        address: '',
-        city: '',
-        country: 'Ethiopia',
-        taxRate: 15,
-        invoicePrefix: 'INV'
-    },
-    language: {
-        interface: 'en',
-        currency: 'ETB',
-        dateFormat: 'DD/MM/YYYY',
-        timeFormat: '12h',
-        timezone: 'Africa/Addis_Ababa'
-    },
-    preferences: {
-        lowStockAlerts: true,
-        salesNotifications: true,
-        emailReports: false,
-        defaultDashboard: 'overview',
-        refreshInterval: 60000,
-        receiptSize: '58mm',
-        autoPrint: false
-    },
-    security: {
-        twoFactor: false,
-        autoLogout: true
-    },
-    backup: {
-        autoBackup: true,
-        frequency: 'daily',
-        time: '02:00'
-    }
-};
-
 // Translations
 const translations = {
     en: {
-        // Header
         english: "EN",
         amharic: "አማ",
-
-        // Navigation
         dashboard: "Dashboard",
         inventory: "Inventory",
         sales: "Sales",
         reports: "Reports",
         settings: "Settings",
         logout: "Logout",
-
-        // Page Content
         settingsTitle: "System Settings",
-        settingsSubtitle: "Configure your business preferences and system options",
+        settingsSubtitle: "Configure your business preferences",
         allSystemsOperational: "All Systems Operational",
         storage: "Storage:",
-
-        // Settings Navigation
         businessProfile: "Business Profile",
         languageRegion: "Language & Region",
         preferences: "Preferences",
-        security: "Security",
-        backupRestore: "Backup & Restore",
         support: "Support",
         about: "About TK-Stock",
-
-        // Business Profile
         basicInformation: "Basic Information",
         businessName: "Business Name",
         businessType: "Business Type",
@@ -109,17 +58,15 @@ const translations = {
         country: "Country",
         taxInformation: "Tax Information",
         taxRate: "Tax Rate (%)",
-        taxRateDescription: "Set the default tax rate applied to all sales",
+        taxRateDescription: "Set default tax rate for all sales",
         invoicePrefix: "Invoice Prefix",
-        invoicePrefixDescription: "Prefix for generated invoice numbers (e.g., INV-1001)",
+        invoicePrefixDescription: "Prefix for invoice numbers (e.g., INV-1001)",
         businessLogo: "Business Logo",
         noLogo: "No Logo",
         uploadLogo: "Upload Logo",
         removeLogo: "Remove",
         logoDescription: "Recommended: 300x300px PNG or JPG, max 2MB",
         saveChanges: "Save Changes",
-
-        // Language & Region
         interfaceLanguage: "Interface Language",
         english: "English",
         englishDescription: "Default system language",
@@ -132,35 +79,31 @@ const translations = {
         timeZone: "Time Zone",
         currentTime: "Current Time:",
         applySettings: "Apply Settings",
-
-        // Preferences
         notifications: "Notifications",
         lowStockAlerts: "Low Stock Alerts",
         lowStockDescription: "Receive alerts when inventory is low",
         salesNotifications: "Sales Notifications",
         salesDescription: "Get notified about new sales",
         emailReports: "Email Reports",
-        emailReportsDescription: "Send daily/weekly reports via email",
+        emailReportsDescription: "Send reports via email",
         dashboardSettings: "Dashboard Settings",
         defaultView: "Default View",
         overview: "Overview",
         analytics: "Analytics",
         quickActions: "Quick Actions",
-        refreshInterval: "Auto-refresh Interval",
+        refreshInterval: "Auto-refresh",
         never: "Never",
         printSettings: "Print Settings",
         receiptSize: "Receipt Size",
         autoPrint: "Auto Print Receipts",
-        autoPrintDescription: "Automatically print receipts after sales",
+        autoPrintDescription: "Auto print after sales",
         savePreferences: "Save Preferences",
-
-        // Support
         contactSupport: "Contact & Support",
         technicalSupport: "Technical Support",
-        technicalSupportDesc: "For system issues, bug reports, and technical questions",
+        technicalSupportDesc: "For system issues and questions",
         supportHours: "Mon-Fri: 9:00 AM - 5:00 PM",
         feedbackSuggestions: "Feedback & Suggestions",
-        feedbackDesc: "Help us improve TK-Stock with your valuable feedback",
+        feedbackDesc: "Help us improve TK-Stock",
         feedbackType: "Feedback Type",
         suggestion: "Suggestion",
         bugReport: "Bug Report",
@@ -168,23 +111,21 @@ const translations = {
         message: "Message",
         sendFeedback: "Send Feedback",
         developmentTeam: "Development Team",
-        teamDesc: "This project is developed as part of our university coursework",
+        teamDesc: "University course project",
         leadDeveloper: "Lead Developer",
         uiDesigner: "UI/UX Designer",
-        courseInfo: "Internet Programming (INSY3081) - Final Project",
-        resourcesDocumentation: "Resources & Documentation",
+        courseInfo: "Internet Programming - INSY3081",
+        resourcesDocumentation: "Resources",
         userManual: "User Manual",
-        userManualDesc: "Complete guide to using TK-Stock",
+        userManualDesc: "Complete guide to TK-Stock",
         videoTutorials: "Video Tutorials",
-        videoTutorialsDesc: "Step-by-step video guides",
+        videoTutorialsDesc: "Step-by-step guides",
         faq: "FAQ",
         faqDesc: "Frequently Asked Questions",
-
-        // About
         aboutTkStock: "About TK-Stock",
-        checkForUpdates: "Check for Updates",
-        systemTagline: "Smart Inventory & Sales Management System",
-        versionInformation: "Version Information",
+        checkForUpdates: "Check Updates",
+        systemTagline: "Smart Inventory & Sales Management",
+        versionInformation: "Version",
         version: "Version",
         releaseDate: "Release Date",
         buildNumber: "Build Number",
@@ -192,80 +133,63 @@ const translations = {
         educationalUse: "Educational Use",
         technologyStack: "Technology Stack",
         educationalPurpose: "Educational Purpose",
-        purposeDesc: "This project is developed as the final project for the Internet Programming course (INSY3081) to demonstrate comprehensive front-end web development skills.",
-        skill1: "HTML5 semantic structure",
-        skill2: "CSS3 responsive design",
-        skill3: "JavaScript DOM manipulation",
-        skill4: "LocalStorage data persistence",
-        skill5: "Multi-language support",
-        skill6: "Professional UI/UX design",
+        purposeDesc: "Final project for Internet Programming course",
+        skill1: "HTML5 structure",
+        skill2: "CSS3 responsive",
+        skill3: "JavaScript DOM",
+        skill4: "LocalStorage",
+        skill5: "Multi-language",
+        skill6: "Professional design",
         acknowledgements: "Acknowledgements",
-        acknowledgementText: "Special thanks to our instructor and classmates for their guidance and support during the development of this project. This represents the culmination of skills learned throughout the Internet Programming course.",
-        teamMembers: "INSY3081 Final Project Team",
-
-        // Common
+        acknowledgementText: "Special thanks to Instructor Selam for guidance and inspiration.",
+        courseImpact: "Skills learned in INSY3081 applied to real-world solution.",
+        teamMembers: "INSY3081 Project Team",
         other: "Other",
-
-        // Footer
         allRights: "All rights reserved",
-        universityProject: "Internet Programming Final Project - INSY3081",
+        universityProject: "Internet Programming Final Project",
         developers: "Developed by: Tsegay & Kasa"
     },
-
     am: {
-        // Header
         english: "EN",
         amharic: "አማ",
-
-        // Navigation
         dashboard: "ዳሽቦርድ",
         inventory: "ክምችት",
         sales: "ሽያጭ",
         reports: "ሪፖርት",
         settings: "ቅንብሮች",
         logout: "ውጣ",
-
-        // Page Content
         settingsTitle: "የስርዓት ቅንብሮች",
-        settingsSubtitle: "የንግድዎን ምርጫዎች እና የስርዓት አማራጮች ያዋቅሩ",
+        settingsSubtitle: "የንግድዎን ምርጫዎች ያዋቅሩ",
         allSystemsOperational: "ሁሉም ስርዓቶች እየሰሩ ነው",
         storage: "ማከማቻ:",
-
-        // Settings Navigation
         businessProfile: "የንግድ መገለጫ",
         languageRegion: "ቋንቋ እና ክልል",
         preferences: "ምርጫዎች",
-        security: "ደህንነት",
-        backupRestore: "ተጠባባቂ እና መመለሻ",
         support: "ድጋፍ",
         about: "ስለ TK-Stock",
-
-        // Business Profile
         basicInformation: "መሰረታዊ መረጃ",
         businessName: "የንግድ ስም",
         businessType: "የንግድ አይነት",
         businessPhone: "ስልክ ቁጥር",
-        businessEmail: "ኢሜይል አድራሻ",
+        businessEmail: "ኢሜይል",
         locationInformation: "የቦታ መረጃ",
-        businessAddress: "የንግድ አድራሻ",
+        businessAddress: "አድራሻ",
         city: "ከተማ",
         country: "አገር",
         taxInformation: "የግብር መረጃ",
-        taxRate: "የግብር መጠን (%)",
-        taxRateDescription: "ለሁሉም ሽያጮች የሚተገበር ነባሪ ግብር መጠን ያዘጋጁ",
+        taxRate: "ግብር (%)",
+        taxRateDescription: "ለሽያጮች ነባሪ ግብር",
         invoicePrefix: "የፋክተር ቅድመ ቃል",
-        invoicePrefixDescription: "ለተፈጠሩ የፋክተር ቁጥሮች ቅድመ ቃል (ለምሳሌ: INV-1001)",
+        invoicePrefixDescription: "ለፋክተር ቁጥሮች (ለምሳሌ: INV-1001)",
         businessLogo: "የንግድ አርማ",
         noLogo: "አርማ የለም",
         uploadLogo: "አርማ ጫን",
         removeLogo: "አስወግድ",
-        logoDescription: "የሚመከር: 300x300px PNG ወይም JPG, ከፍተኛ 2MB",
-        saveChanges: "ለውጦችን አስቀምጥ",
-
-        // Language & Region
+        logoDescription: "የሚመከር: 300x300px PNG ወይም JPG",
+        saveChanges: "አስቀምጥ",
         interfaceLanguage: "የመግቢያ ቋንቋ",
         english: "እንግሊዝኛ",
-        englishDescription: "ነባሪ የስርዓት ቋንቋ",
+        englishDescription: "ነባሪ ቋንቋ",
         amharic: "አማርኛ",
         amharicDescription: "ለኢትዮጵያዊ ንግዶች",
         currencyFormatting: "ምንዛሪ እና ቅርጸት",
@@ -274,84 +198,75 @@ const translations = {
         timeFormat: "የሰዓት ቅርጸት",
         timeZone: "የሰዓት ሰሌዳ",
         currentTime: "አሁን ያለ ሰዓት:",
-        applySettings: "ቅንብሮችን ተግብር",
-
-        // Preferences
+        applySettings: "ተግብር",
         notifications: "ማሳወቂያዎች",
-        lowStockAlerts: "ዝቅተኛ ክምችት ማንቂያዎች",
-        lowStockDescription: "ክምችት ሲያንስ ማንቂያዎችን ይቀበሉ",
-        salesNotifications: "የሽያጭ ማሳወቂያዎች",
+        lowStockAlerts: "ዝቅተኛ ክምችት ማንቂያ",
+        lowStockDescription: "ክምችት ሲያንስ ማንቂያ ይቀበሉ",
+        salesNotifications: "የሽያጭ ማሳወቂያ",
         salesDescription: "ስለ አዲስ ሽያጭ ይታወቁ",
-        emailReports: "ኢሜይል ሪፖርቶች",
-        emailReportsDescription: "በየቀኑ/በሳምንቱ ሪፖርቶችን በኢሜይል ይላኩ",
-        dashboardSettings: "የዳሽቦርድ ቅንብሮች",
+        emailReports: "ኢሜይል ሪፖርት",
+        emailReportsDescription: "ሪፖርቶችን በኢሜይል ይላኩ",
+        dashboardSettings: "የዳሽቦርድ ቅንብር",
         defaultView: "ነባሪ እይታ",
         overview: "አጠቃላይ እይታ",
         analytics: "ትንታኔ",
         quickActions: "ፈጣን እርምጃዎች",
-        refreshInterval: "ራስ-ሰር የማደስ ክፍተት",
+        refreshInterval: "ራስ-ሰር ማደስ",
         never: "ፈፅሞ አይደለም",
-        printSettings: "የማተም ቅንብሮች",
+        printSettings: "የማተም ቅንብር",
         receiptSize: "የራሲት መጠን",
-        autoPrint: "ራስ-ሰር ራሲት አትም",
-        autoPrintDescription: "ከሽያጭ በኋላ ራሲትን በራስ-ሰር አትም",
-        savePreferences: "ምርጫዎችን አስቀምጥ",
-
-        // Support
+        autoPrint: "ራስ-ሰር ራሲት",
+        autoPrintDescription: "ከሽያጭ በኋላ ራስ-ሰር አትም",
+        savePreferences: "አስቀምጥ",
         contactSupport: "አግኝነት እና ድጋፍ",
         technicalSupport: "ቴክኒካል ድጋፍ",
-        technicalSupportDesc: "ለስርዓት ችግሮች፣ ስህተት ሪፖርቶች እና ቴክኒካል ጥያቄዎች",
-        supportHours: "ሰኞ-አርብ: 9:00 ጥዋት - 5:00 ከሰዓት",
-        feedbackSuggestions: "የምላሽ አስተያየት እና ሐሳቦች",
-        feedbackDesc: "TK-Stockን ለማሻሻል በእርስዎ እርዳታ",
-        feedbackType: "የምላሽ አስተያየት አይነት",
+        technicalSupportDesc: "ለስርዓት ችግሮች",
+        supportHours: "ሰኞ-አርብ: 9:00 - 5:00",
+        feedbackSuggestions: "ምላሽ አስተያየት",
+        feedbackDesc: "TK-Stockን ለማሻሻል",
+        feedbackType: "የምላሽ አይነት",
         suggestion: "ሐሳብ",
-        bugReport: "የስህተት ሪፖርት",
-        featureRequest: "የባህሪ ጥያቄ",
+        bugReport: "ስህተት ሪፖርት",
+        featureRequest: "ባህሪ ጥያቄ",
         message: "መልዕክት",
-        sendFeedback: "ምላሽ አስተያየት ላክ",
+        sendFeedback: "ምላሽ ላክ",
         developmentTeam: "የልማት ቡድን",
-        teamDesc: "ይህ ፕሮጀክት እንደ የዩኒቨርሲቲ ኮርስ የመጨረሻ ፕሮጀክት ይፈጠራል",
+        teamDesc: "የዩኒቨርሲቲ ፕሮጀክት",
         leadDeveloper: "ሊድ ዴቨሎፐር",
         uiDesigner: "UI/UX ዲዛይነር",
-        courseInfo: "የበይነመረብ ፕሮግራሚንግ (INSY3081) - የመጨረሻ ፕሮጀክት",
-        resourcesDocumentation: "መርጃዎች እና ሰነዶች",
+        courseInfo: "የበይነመረብ ፕሮግራሚንግ - INSY3081",
+        resourcesDocumentation: "መርጃዎች",
         userManual: "የተጠቃሚ መመሪያ",
-        userManualDesc: "TK-Stock እንዴት እንደሚጠቀሙ ሙሉ መመሪያ",
-        videoTutorials: "የቪዲዮ ትምህርቶች",
-        videoTutorialsDesc: "ደረጃ በደረጃ የቪዲዮ መመሪያዎች",
-        faq: "ተደጋግሞ የሚጠየቁ ጥያቄዎች",
-        faqDesc: "ተደጋግሞ የሚጠየቁ ጥያቄዎች",
-
-        // About
+        userManualDesc: "TK-Stock መመሪያ",
+        videoTutorials: "ቪዲዮ ትምህርት",
+        videoTutorialsDesc: "ደረጃ በደረጃ",
+        faq: "ተደጋግሞ የሚጠየቁ",
+        faqDesc: "ተደጋግሞ የሚጠየቁ",
         aboutTkStock: "ስለ TK-Stock",
-        checkForUpdates: "ለዝመናዎች ይፈትሹ",
-        systemTagline: "ዘመናዊ ክምችት እና የሽያጭ አስተዳደር ስርዓት",
-        versionInformation: "የተለቀቀ መረጃ",
+        checkForUpdates: "ዝመና ፈትሽ",
+        systemTagline: "ዘመናዊ ክምችት እና ሽያጭ ስርዓት",
+        versionInformation: "ተለቀቀ መረጃ",
         version: "ተለቀቀ",
         releaseDate: "የተለቀቀበት ቀን",
         buildNumber: "የግንባታ ቁጥር",
         license: "ፈቃድ",
-        educationalUse: "ለትምህርት አገልግሎት",
-        technologyStack: "ቴክኖሎጂ አቀማመጥ",
+        educationalUse: "ለትምህርት",
+        technologyStack: "ቴክኖሎጂ",
         educationalPurpose: "የትምህርት ዓላማ",
-        purposeDesc: "ይህ ፕሮጀክት የበይነመረብ ፕሮግራሚንግ ኮርስ (INSY3081) የመጨረሻ ፕሮጀክት በመሆን የተሟላ የፊት-ጫፍ የድር ልማት ችሎታዎችን ለማሳየት ይፈጠራል።",
-        skill1: "HTML5 ሴማንቲክ መዋቅር",
-        skill2: "CSS3 ምላሽ የሚሰጥ ዲዛይን",
-        skill3: "JavaScript DOM አያያዝ",
-        skill4: "LocalStorage ውሂብ መጠበቂያ",
-        skill5: "ብዙ-ቋንቋ ድጋፍ",
-        skill6: "ፕሮፌሽናል UI/UX ዲዛይን",
+        purposeDesc: "የዩኒቨርሲቲ ኮርስ የመጨረሻ ፕሮጀክት",
+        skill1: "HTML5 መዋቅር",
+        skill2: "CSS3 ምላሽ",
+        skill3: "JavaScript DOM",
+        skill4: "LocalStorage",
+        skill5: "ብዙ-ቋንቋ",
+        skill6: "ፕሮፌሽናል ዲዛይን",
         acknowledgements: "ምስጋናዎች",
-        acknowledgementText: "ለእርስዎ መምህር እና ለአደረጃጀት ደጋፊዎች ለመመሪያቸው እና ለድጋፋቸው ምስጋና ይግባቸው። ይህ በዩኒቨርሲቲ ኮርስ ውስጥ ከተማሩት ችሎታዎች የተገኘ ውጤት ነው።",
-        teamMembers: "INSY3081 የመጨረሻ ፕሮጀክት ቡድን",
-
-        // Common
+        acknowledgementText: "ለመምህር ሰላም ለመመሪያቸው እና ለማበረታቻቸው እናመሰግናለን።",
+        courseImpact: "በ INSY3081 ከተማርነው ችሎታዎች የተገኘ ውጤት።",
+        teamMembers: "INSY3081 ፕሮጀክት ቡድን",
         other: "ሌላ",
-
-        // Footer
         allRights: "ሁሉም መብቶች የተጠበቁ ናቸው",
-        universityProject: "የበይነመረብ ፕሮግራሚንግ የመጨረሻ ፕሮጀክት - INSY3081",
+        universityProject: "የበይነመረብ ፕሮግራሚንግ ፕሮጀክት",
         developers: "ተግባራዊ ከሰሩት: ፀጋይ እና ካሳ"
     }
 };
@@ -360,195 +275,159 @@ const translations = {
 function setLanguage(lang) {
     currentLang = lang;
 
-    // Update active button in header
+    // Update active button
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.remove('active');
+        if ((lang === 'en' && btn.textContent === 'EN') ||
+            (lang === 'am' && btn.textContent === 'አማ')) {
+            btn.classList.add('active');
+        }
     });
-    event.target.classList.add('active');
 
-    // Update all translatable elements
+    // Update all translations
     updateTranslations();
 
-    // Update language select
-    selectLanguage(lang, true);
+    // Update language option
+    selectLanguage(lang);
 
-    // Save language preference
+    // Save preference
     localStorage.setItem('ethiostock_language', lang);
-
-    // Update HTML lang attribute
     document.documentElement.setAttribute('lang', lang);
 
-    // Save language setting
-    saveLanguageSettings(false);
+    showNotification(
+        lang === 'en' ? 'Language changed to English' : 'ቋንቋ ወደ አማርኛ ተቀየረ',
+        'success'
+    );
 }
 
 // Update translations
 function updateTranslations() {
-    const lang = translations[currentLang];
-
-    // Update all elements with data-i18n attribute
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
-        if (lang[key]) {
-            element.textContent = lang[key];
-        }
-    });
-
-    // Update select options with data-i18n attributes
-    document.querySelectorAll('[data-i18n] option').forEach(option => {
-        const key = option.getAttribute('data-i18n');
-        if (lang[key]) {
-            option.textContent = lang[key];
-        }
-    });
-
-    // Update placeholders
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-        const key = element.getAttribute('data-i18n-placeholder');
-        if (lang[key]) {
-            element.setAttribute('placeholder', lang[key]);
+        if (translations[currentLang][key]) {
+            element.textContent = translations[currentLang][key];
         }
     });
 }
 
 // Select language option
-function selectLanguage(lang, fromHeader = false) {
-    // Update language options
+function selectLanguage(lang) {
+    // Reset all
     document.querySelectorAll('.language-option').forEach(option => {
         option.classList.remove('active');
-        const checkIcon = option.querySelector('.check-icon');
-        if (checkIcon) checkIcon.style.opacity = '0';
     });
 
-    // Activate selected language option
-    const selectedOption = document.querySelector(`.language-option:nth-child(${lang === 'en' ? 1 : 2})`);
-    if (selectedOption) {
-        selectedOption.classList.add('active');
-        const checkIcon = selectedOption.querySelector('.check-icon');
-        if (checkIcon) checkIcon.style.opacity = '1';
-    }
-
-    // Update language select
-    document.getElementById('languageSelect').value = lang;
-
-    // If called from header, update translations
-    if (!fromHeader) {
-        currentLang = lang;
-        updateTranslations();
-        localStorage.setItem('ethiostock_language', lang);
-        document.documentElement.setAttribute('lang', lang);
+    // Activate selected
+    if (lang === 'en') {
+        document.getElementById('englishOption').classList.add('active');
+    } else {
+        document.getElementById('amharicOption').classList.add('active');
     }
 }
 
-// Load saved settings
-function loadSettings() {
-    const savedSettings = localStorage.getItem('tkstock_settings');
-    const settings = savedSettings ? JSON.parse(savedSettings) : {};
+// Show notification
+function showNotification(message, type = 'info') {
+    const notification = document.getElementById('notification');
+    const messageElement = document.getElementById('notificationMessage');
 
-    // Merge with defaults
-    const mergedSettings = {
-        business: { ...defaultSettings.business, ...settings.business },
-        language: { ...defaultSettings.language, ...settings.language },
-        preferences: { ...defaultSettings.preferences, ...settings.preferences },
-        security: { ...defaultSettings.security, ...settings.security },
-        backup: { ...defaultSettings.backup, ...settings.backup }
+    messageElement.textContent = message;
+    notification.className = `notification ${type} show`;
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 3000);
+}
+
+// Tab switching - SIMPLE AND WORKING
+function setupTabSwitching() {
+    const tabButtons = document.querySelectorAll('.settings-nav-btn');
+    const tabContents = document.querySelectorAll('.settings-tab');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const tabName = this.getAttribute('data-tab');
+
+            // Update buttons
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+
+            // Update content
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                if (content.id === tabName + 'Tab') {
+                    content.classList.add('active');
+                }
+            });
+        });
+    });
+}
+
+// Update current time
+function updateCurrentTime() {
+    const now = new Date();
+    const options = {
+        hour12: document.getElementById('timeFormat').value === '12h',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
     };
 
-    // Load business settings
-    document.getElementById('businessName').value = mergedSettings.business.name;
-    document.getElementById('businessType').value = mergedSettings.business.type;
-    document.getElementById('businessPhone').value = mergedSettings.business.phone;
-    document.getElementById('businessEmail').value = mergedSettings.business.email;
-    document.getElementById('businessAddress').value = mergedSettings.business.address;
-    document.getElementById('businessCity').value = mergedSettings.business.city;
-    document.getElementById('businessCountry').value = mergedSettings.business.country;
-    document.getElementById('taxRate').value = mergedSettings.business.taxRate;
-    document.getElementById('invoicePrefix').value = mergedSettings.business.invoicePrefix;
-
-    // Load language settings
-    selectLanguage(mergedSettings.language.interface, true);
-    document.getElementById('currency').value = mergedSettings.language.currency;
-    document.getElementById('dateFormat').value = mergedSettings.language.dateFormat;
-    document.getElementById('timeFormat').value = mergedSettings.language.timeFormat;
-    document.getElementById('timezone').value = mergedSettings.language.timezone;
-
-    // Load preference settings
-    document.getElementById('lowStockAlerts').checked = mergedSettings.preferences.lowStockAlerts;
-    document.getElementById('salesNotifications').checked = mergedSettings.preferences.salesNotifications;
-    document.getElementById('emailReports').checked = mergedSettings.preferences.emailReports;
-    document.getElementById('defaultDashboard').value = mergedSettings.preferences.defaultDashboard;
-    document.getElementById('refreshInterval').value = mergedSettings.preferences.refreshInterval;
-    document.getElementById('receiptSize').value = mergedSettings.preferences.receiptSize;
-    document.getElementById('autoPrint').checked = mergedSettings.preferences.autoPrint;
-
-    // Load logo if exists
-    const logoData = localStorage.getItem('tkstock_logo');
-    if (logoData) {
-        const logoPreview = document.getElementById('logoPreview');
-        logoPreview.innerHTML = `<img src="${logoData}" alt="Business Logo">`;
-        logoPreview.classList.add('has-logo');
-    }
-
-    return mergedSettings;
+    const timeStr = now.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'am-ET', options);
+    document.getElementById('currentTimeDisplay').textContent = timeStr;
 }
 
-// Save settings to localStorage
-function saveSettings(settings) {
-    localStorage.setItem('tkstock_settings', JSON.stringify(settings));
+// Load settings
+function loadSettings() {
+    // Load business settings
+    const settings = JSON.parse(localStorage.getItem('tkstock_settings') || '{}');
+
+    if (settings.business) {
+        document.getElementById('businessName').value = settings.business.name || '';
+        document.getElementById('businessType').value = settings.business.type || 'retail';
+        document.getElementById('businessPhone').value = settings.business.phone || '';
+        document.getElementById('businessEmail').value = settings.business.email || '';
+        document.getElementById('businessAddress').value = settings.business.address || '';
+        document.getElementById('businessCity').value = settings.business.city || '';
+        document.getElementById('taxRate').value = settings.business.taxRate || 15;
+        document.getElementById('invoicePrefix').value = settings.business.invoicePrefix || 'INV';
+    }
+
+    if (settings.preferences) {
+        document.getElementById('lowStockAlerts').checked = settings.preferences.lowStockAlerts || true;
+        document.getElementById('salesNotifications').checked = settings.preferences.salesNotifications || true;
+        document.getElementById('emailReports').checked = settings.preferences.emailReports || false;
+        document.getElementById('defaultDashboard').value = settings.preferences.defaultDashboard || 'overview';
+        document.getElementById('refreshInterval').value = settings.preferences.refreshInterval || 60000;
+        document.getElementById('receiptSize').value = settings.preferences.receiptSize || '58mm';
+        document.getElementById('autoPrint').checked = settings.preferences.autoPrint || false;
+    }
 }
 
 // Save business settings
 function saveBusinessSettings() {
-    const settings = loadSettings();
-
-    settings.business = {
-        name: document.getElementById('businessName').value.trim(),
-        type: document.getElementById('businessType').value,
-        phone: document.getElementById('businessPhone').value.trim(),
-        email: document.getElementById('businessEmail').value.trim(),
-        address: document.getElementById('businessAddress').value.trim(),
-        city: document.getElementById('businessCity').value.trim(),
-        country: document.getElementById('businessCountry').value.trim(),
-        taxRate: parseFloat(document.getElementById('taxRate').value) || 15,
-        invoicePrefix: document.getElementById('invoicePrefix').value.trim() || 'INV'
+    const settings = {
+        business: {
+            name: document.getElementById('businessName').value,
+            type: document.getElementById('businessType').value,
+            phone: document.getElementById('businessPhone').value,
+            email: document.getElementById('businessEmail').value,
+            address: document.getElementById('businessAddress').value,
+            city: document.getElementById('businessCity').value,
+            taxRate: parseFloat(document.getElementById('taxRate').value),
+            invoicePrefix: document.getElementById('invoicePrefix').value
+        }
     };
 
-    saveSettings(settings);
+    localStorage.setItem('tkstock_settings', JSON.stringify(settings));
     showNotification(
-        currentLang === 'en'
-            ? 'Business profile saved successfully!'
-            : 'የንግድ መገለጫ በተሳካ ሁኔታ ተቀምጧል!',
+        currentLang === 'en' ? 'Business settings saved!' : 'የንግድ ቅንብሮች ተቀምጠዋል!',
         'success'
     );
 }
 
-// Save language settings
-function saveLanguageSettings(showNotification = true) {
-    const settings = loadSettings();
-
-    settings.language = {
-        interface: document.getElementById('languageSelect').value,
-        currency: document.getElementById('currency').value,
-        dateFormat: document.getElementById('dateFormat').value,
-        timeFormat: document.getElementById('timeFormat').value,
-        timezone: document.getElementById('timezone').value
-    };
-
-    saveSettings(settings);
-
-    if (showNotification) {
-        showNotification(
-            currentLang === 'en'
-                ? 'Language settings applied successfully!'
-                : 'የቋንቋ ቅንብሮች በተሳካ ሁኔታ ተተግብረዋል!',
-            'success'
-        );
-    }
-}
-
 // Save preferences
 function savePreferences() {
-    const settings = loadSettings();
+    const settings = JSON.parse(localStorage.getItem('tkstock_settings') || '{}');
 
     settings.preferences = {
         lowStockAlerts: document.getElementById('lowStockAlerts').checked,
@@ -560,260 +439,124 @@ function savePreferences() {
         autoPrint: document.getElementById('autoPrint').checked
     };
 
-    saveSettings(settings);
+    localStorage.setItem('tkstock_settings', JSON.stringify(settings));
     showNotification(
-        currentLang === 'en'
-            ? 'Preferences saved successfully!'
-            : 'ምርጫዎች በተሳካ ሁኔታ ተቀምጠዋል!',
+        currentLang === 'en' ? 'Preferences saved!' : 'ምርጫዎች ተቀምጠዋል!',
         'success'
     );
 }
 
 // Upload logo
 function uploadLogo() {
-    const fileInput = document.getElementById('logoFile');
-    fileInput.click();
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
 
-    fileInput.onchange = function () {
-        const file = this.files[0];
-        if (!file) return;
+    input.onchange = function (e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const logoPreview = document.getElementById('logoPreview');
+                logoPreview.innerHTML = `<img src="${e.target.result}" alt="Logo">`;
+                logoPreview.classList.add('has-logo');
 
-        if (!file.type.startsWith('image/')) {
-            showNotification(
-                currentLang === 'en'
-                    ? 'Please select an image file!'
-                    : 'እባክዎ የምስል ፋይል ይምረጡ!',
-                'error'
-            );
-            return;
+                localStorage.setItem('tkstock_logo', e.target.result);
+                showNotification(
+                    currentLang === 'en' ? 'Logo uploaded!' : 'አርማ ተጫኗል!',
+                    'success'
+                );
+            };
+            reader.readAsDataURL(file);
         }
-
-        if (file.size > 2 * 1024 * 1024) { // 2MB
-            showNotification(
-                currentLang === 'en'
-                    ? 'File size must be less than 2MB!'
-                    : 'የፋይል መጠን ከ2MB በታች መሆን አለበት!',
-                'error'
-            );
-            return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            const logoPreview = document.getElementById('logoPreview');
-            logoPreview.innerHTML = `<img src="${e.target.result}" alt="Business Logo">`;
-            logoPreview.classList.add('has-logo');
-
-            // Save to localStorage
-            localStorage.setItem('tkstock_logo', e.target.result);
-
-            showNotification(
-                currentLang === 'en'
-                    ? 'Logo uploaded successfully!'
-                    : 'አርማ በተሳካ ሁኔታ ተጫኗል!',
-                'success'
-            );
-        };
-        reader.readAsDataURL(file);
     };
+
+    input.click();
 }
 
 // Remove logo
 function removeLogo() {
-    const logoPreview = document.getElementById('logoPreview');
-    logoPreview.innerHTML = '<i class="fas fa-store"></i><span data-i18n="noLogo">No Logo</span>';
-    logoPreview.classList.remove('has-logo');
-
+    document.getElementById('logoPreview').innerHTML =
+        '<i class="fas fa-store-alt"></i><span data-i18n="noLogo">No Logo</span>';
+    document.getElementById('logoPreview').classList.remove('has-logo');
     localStorage.removeItem('tkstock_logo');
 
     showNotification(
-        currentLang === 'en'
-            ? 'Logo removed successfully!'
-            : 'አርማ በተሳካ ሁኔታ ተወግዷል!',
+        currentLang === 'en' ? 'Logo removed!' : 'አርማ ተወግዷል!',
         'success'
     );
 }
 
 // Submit feedback
 function submitFeedback() {
-    const feedbackType = document.getElementById('feedbackType').value;
-    const feedbackMessage = document.getElementById('feedbackMessage').value.trim();
-    const feedbackEmail = document.getElementById('feedbackEmail').value.trim();
-
-    if (!feedbackMessage) {
+    const message = document.getElementById('feedbackMessage').value;
+    if (!message.trim()) {
         showNotification(
-            currentLang === 'en'
-                ? 'Please enter your feedback message!'
-                : 'እባክዎ የምላሽ አስተያየትዎን ያስገቡ!',
+            currentLang === 'en' ? 'Please enter feedback!' : 'እባክዎ ምላሽ ያስገቡ!',
             'error'
         );
         return;
     }
 
-    // For demo purposes, just show success message
-    console.log('Feedback submitted:', {
-        type: feedbackType,
-        message: feedbackMessage,
-        email: feedbackEmail,
-        timestamp: new Date().toISOString()
-    });
-
-    // Clear form
     document.getElementById('feedbackMessage').value = '';
-    document.getElementById('feedbackEmail').value = '';
-
     showNotification(
-        currentLang === 'en'
-            ? 'Thank you for your feedback! We appreciate your input.'
-            : 'ስለ ምላሽ አስተያየትዎ እናመሰግናለን! አስተያየትዎን እናደንቃለን።',
+        currentLang === 'en' ? 'Thank you for your feedback!' : 'ስለ ምላሽዎ እናመሰግናለን!',
         'success'
     );
 }
 
-// Check for updates
+// Check updates
 function checkForUpdates() {
-    // For demo purposes
     showNotification(
-        currentLang === 'en'
-            ? 'You are using the latest version of TK-Stock!'
-            : 'አሁን የቅርቡ የ TK-Stock ስሪት ነዎት!',
+        currentLang === 'en' ? 'You have the latest version!' : 'የቅርቡ ስሪት ነዎት!',
         'info'
     );
 }
 
-// Update current time
-function updateCurrentTime() {
-    const now = new Date();
-    const timeDisplay = document.getElementById('currentTimeDisplay');
-
-    if (timeDisplay) {
-        const options = {
-            timeZone: 'Africa/Addis_Ababa',
-            hour12: document.getElementById('timeFormat').value === '12h',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        };
-
-        const timeStr = now.toLocaleTimeString('en-US', options);
-        timeDisplay.textContent = timeStr;
-    }
-}
-
-// Update storage info
-function updateStorageInfo() {
-    let totalSize = 0;
-    let usedSize = 0;
-
-    // Calculate localStorage usage
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        const value = localStorage.getItem(key);
-        usedSize += key.length + value.length;
-    }
-
-    // Convert to KB
-    usedSize = usedSize / 1024;
-
-    // For demo, use 5MB as total
-    totalSize = 5120; // 5MB in KB
-
-    const percentage = Math.min(100, Math.round((usedSize / totalSize) * 100));
-    const storageElement = document.getElementById('storageUsed');
-
-    if (storageElement) {
-        storageElement.textContent = `${percentage}% used`;
-        storageElement.style.color = percentage > 80 ? '#e74c3c' : percentage > 60 ? '#f39c12' : '#2ecc71';
-    }
-}
-
-// Show notification
-function showNotification(message, type = 'info') {
-    const notification = document.getElementById('notification');
-    const notificationMessage = document.getElementById('notificationMessage');
-
-    notificationMessage.textContent = message;
-
-    // Set color based on type
-    const colors = {
-        success: '#2ecc71',
-        error: '#e74c3c',
-        info: '#3498db',
-        warning: '#f39c12'
-    };
-
-    notification.style.borderLeftColor = colors[type] || colors.info;
-
-    // Show notification
-    notification.classList.add('show');
-
-    // Auto hide after 5 seconds
-    setTimeout(() => {
-        hideNotification();
-    }, 5000);
-}
-
-// Hide notification
-function hideNotification() {
-    const notification = document.getElementById('notification');
-    notification.classList.remove('show');
-}
-
 // Setup event listeners
 function setupEventListeners() {
-    // Settings tab navigation
-    document.querySelectorAll('.settings-nav-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-            const tabId = this.dataset.tab + 'Tab';
-
-            // Update active button
-            document.querySelectorAll('.settings-nav-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-
-            // Show active tab
-            document.querySelectorAll('.settings-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.getElementById(tabId).classList.add('active');
-        });
+    // Buttons
+    document.getElementById('saveBusinessBtn').addEventListener('click', saveBusinessSettings);
+    document.getElementById('savePreferencesBtn').addEventListener('click', savePreferences);
+    document.getElementById('uploadLogoBtn').addEventListener('click', uploadLogo);
+    document.getElementById('removeLogoBtn').addEventListener('click', removeLogo);
+    document.getElementById('submitFeedbackBtn').addEventListener('click', submitFeedback);
+    document.getElementById('checkUpdatesBtn').addEventListener('click', checkForUpdates);
+    document.getElementById('notificationClose').addEventListener('click', () => {
+        document.getElementById('notification').classList.remove('show');
     });
 
-    // Logout button
+    // Language options
+    document.getElementById('englishOption').addEventListener('click', () => setLanguage('en'));
+    document.getElementById('amharicOption').addEventListener('click', () => setLanguage('am'));
+
+    // Logout
     document.getElementById('logoutBtn').addEventListener('click', function (e) {
         e.preventDefault();
-        const confirmMessage = currentLang === 'en'
-            ? "Are you sure you want to logout?"
-            : "እርግጠኛ ነህ መውጣት ትፈልጋለህ?";
-
-        if (confirm(confirmMessage)) {
+        if (confirm(currentLang === 'en' ? 'Logout?' : 'መውጣት?')) {
             localStorage.removeItem('ethiostock_user');
             window.location.href = 'login.html';
         }
     });
-
-    // Language select change
-    document.getElementById('languageSelect').addEventListener('change', function () {
-        selectLanguage(this.value);
-    });
-
-    // Time format change
-    document.getElementById('timeFormat').addEventListener('change', updateCurrentTime);
-
-    // Auto-update time every second
-    setInterval(updateCurrentTime, 1000);
-
-    // Update storage info periodically
-    setInterval(updateStorageInfo, 30000);
 }
 
-// Initialize settings page
+// Initialize everything
 function initSettings() {
-    // Check if user is logged in
     if (!checkLogin()) return;
 
-    // Set initial language
+    initUserInfo();
+    loadSettings();
+    updateTranslations();
+    setupTabSwitching();
+    setupEventListeners();
+
+    // Set current time and update every second
+    updateCurrentTime();
+    setInterval(updateCurrentTime, 1000);
+
+    // Set current language
     const savedLang = localStorage.getItem('ethiostock_language') || 'en';
-    currentLang = savedLang;
+    selectLanguage(savedLang);
 
     // Set active language button
     document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -824,124 +567,8 @@ function initSettings() {
         }
     });
 
-    // Initialize user info
-    initUserInfo();
-
-    // Load settings
-    loadSettings();
-
-    // Update translations
-    updateTranslations();
-
-    // Setup event listeners
-    setupEventListeners();
-
-    // Update current time
-    updateCurrentTime();
-
-    // Update storage info
-    updateStorageInfo();
-
-    // Set HTML language
-    document.documentElement.setAttribute('lang', savedLang);
-
-    console.log('Settings page loaded successfully');
+    console.log('Settings page loaded!');
 }
 
 // Start when page loads
 document.addEventListener('DOMContentLoaded', initSettings);
-// SIMPLE TAB SWITCHING - GUARANTEED TO WORK
-// document.addEventListener('DOMContentLoaded', function () {
-//     console.log('=== SETTINGS PAGE LOADED ===');
-
-//     // 1. TAB SWITCHING
-//     setupTabs();
-
-//     // 2. QUICK TEST
-//     setTimeout(() => {
-//         const tabs = document.querySelectorAll('.settings-nav-btn');
-//         console.log('Total tabs found:', tabs.length);
-
-//         if (tabs.length > 1) {
-//             console.log('Trying to click second tab...');
-//             tabs[1].click();
-//         }
-//     }, 500);
-// });
-
-// function setupTabs() {
-//     // Get ALL tab buttons
-//     const tabButtons = document.querySelectorAll('.settings-nav-btn');
-//     console.log('Tab buttons found:', tabButtons.length);
-
-//     // Get ALL tab sections
-//     const tabSections = document.querySelectorAll('.settings-tab');
-//     console.log('Tab sections found:', tabSections.length);
-
-//     // Show what we found
-//     tabButtons.forEach((btn, i) => {
-//         console.log(`Button ${i}:`, btn.textContent.trim(), 'data-tab:', btn.getAttribute('data-tab'));
-//     });
-
-//     tabSections.forEach((section, i) => {
-//         console.log(`Section ${i}: ID =`, section.id);
-//     });
-
-//     // Add click event to EACH button
-//     tabButtons.forEach(button => {
-//         button.addEventListener('click', function (event) {
-//             event.preventDefault(); // Stop any default behavior
-
-//             console.log('=== TAB CLICKED ===');
-//             console.log('Button text:', this.textContent.trim());
-
-//             // Get which tab to show
-//             const tabId = this.getAttribute('data-tab');
-//             console.log('Tab ID from data-tab:', tabId);
-//             console.log('Looking for section with id:', tabId + 'Tab');
-
-//             // 1. Remove 'active' from ALL buttons
-//             tabButtons.forEach(btn => {
-//                 btn.classList.remove('active');
-//             });
-
-//             // 2. Add 'active' to clicked button
-//             this.classList.add('active');
-//             console.log('Button now has active class:', this.classList.contains('active'));
-
-//             // 3. Hide ALL sections
-//             tabSections.forEach(section => {
-//                 section.classList.remove('active');
-//                 console.log('Hiding section:', section.id);
-//             });
-
-//             // 4. Show the selected section
-//             const targetId = tabId + 'Tab';
-//             const targetSection = document.getElementById(targetId);
-
-//             if (targetSection) {
-//                 targetSection.classList.add('active');
-//                 console.log('SUCCESS! Showing section:', targetId);
-//                 console.log('Section now has active class:', targetSection.classList.contains('active'));
-//             } else {
-//                 console.error('ERROR: Cannot find section with id:', targetId);
-//                 console.log('Available sections:');
-//                 tabSections.forEach(s => console.log(' -', s.id));
-//             }
-
-//             console.log('=== END TAB CLICK ===');
-//         });
-//     });
-
-//     // Activate first tab if none is active
-//     const activeButtons = document.querySelectorAll('.settings-nav-btn.active');
-//     console.log('Initially active buttons:', activeButtons.length);
-
-//     if (activeButtons.length === 0 && tabButtons.length > 0) {
-//         console.log('No active tab found. Clicking first one...');
-//         tabButtons[0].click();
-//     } else if (activeButtons.length > 0) {
-//         console.log('Active tab found:', activeButtons[0].textContent.trim());
-//         activeButtons[0].click();
-//     }
-// }
