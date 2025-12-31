@@ -309,14 +309,18 @@ function setupEventListeners() {
     });
 
     document.getElementById('addCustomerBtn').addEventListener('click', function () {
-        showMessage(currentLang === 'en' ? "Add Customer feature" : "ደንበኛ ማከል ባህሪ");
+        // Navigate to settings or specific customer page
+        window.location.href = 'settings.html?tab=customers';
     });
-
     // View all links
-    document.querySelectorAll('.view-all').forEach(link => {
+    document.querySelectorAll('.view-all').forEach((link, index) => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
-            showMessage(currentLang === 'en' ? "Viewing all items..." : "ሁሉንም እየታየ ነው...");
+            if (index === 0) { // First view-all (Recent Activity)
+                window.location.href = 'sales.html';
+            } else if (index === 1) { // Second view-all (Stock Alerts)
+                window.location.href = 'inventory.html?filter=low-stock';
+            }
         });
     });
 }

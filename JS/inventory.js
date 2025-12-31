@@ -607,25 +607,38 @@ function editProduct(productId) {
         document.getElementById('productDescription').value = product.description || '';
 
         // Change save button to update
-        document.getElementById('saveBtn').textContent =
-            currentLang === 'en' ? 'Update Product' : 'ምርቱን አዘምን';
-        document.getElementById('saveBtn').dataset.mode = 'edit';
-        document.getElementById('saveBtn').dataset.productId = productId;
+        const saveBtn = document.getElementById('saveBtn');
+        saveBtn.textContent = currentLang === 'en' ? 'Update Product' : 'ምርቱን አዘምን';
+        saveBtn.dataset.mode = 'edit';
+        saveBtn.dataset.productId = productId;
     }
 }
 
 function deleteProduct(productId) {
     const confirmMsg = currentLang === 'en'
-        ? 'Are you sure you want to delete this product?'
-        : 'እርግጠኛ ነህ ይህን ምርት ማስወገድ ትፈልጋለህ?';
+        ? 'Are you sure you want to delete this product? This action cannot be undone.'
+        : 'እርግጠኛ ነህ ይህን ምርት ማስወገድ ትፈልጋለህ? ይህ እርምጃ ሊመለስ አይችልም።';
 
     if (confirm(confirmMsg)) {
-        // In a real app, this would remove from database
-        console.log(`${currentLang === 'en' ? 'Deleted' : 'የተሰረደ'} product ID: ${productId}`);
-        // Reload products to show updated list
-        loadProducts();
-        updateStats();
-        loadFeaturedProducts();
+        // Remove product from both language arrays
+        const productIndexEn = sampleProducts.en.findIndex(p => p.id === productId);
+        const productIndexAm = sampleProducts.am.findIndex(p => p.id === productId);
+
+        if (productIndexEn !== -1 && productIndexAm !== -1) {
+            sampleProducts.en.splice(productIndexEn, 1);
+            sampleProducts.am.splice(productIndexAm, 1);
+
+            // Show success message
+            const successMsg = currentLang === 'en'
+                ? 'Product deleted successfully!'
+                : 'ምርቱ በተሳካ ሁኔታ ተሰርዟል!';
+            alert(successMsg);
+
+            // Reload the display
+            loadProducts();
+            updateStats();
+            loadFeaturedProducts();
+        }
     }
 }
 
@@ -644,15 +657,17 @@ function setupEventListeners() {
     });
 
     // Product form submission
+    // Enhanced form submission to handle both add and edit
     document.getElementById('productForm').addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const mode = document.getElementById('saveBtn').dataset.mode;
-        const productId = document.getElementById('saveBtn').dataset.productId;
+        const saveBtn = document.getElementById('saveBtn');
+        const mode = saveBtn.dataset.mode || 'add';
+        const productId = saveBtn.dataset.productId;
 
         // Get form values
         const newProduct = {
-            id: mode === 'edit' ? parseInt(productId) : sampleProducts[currentLang].length + 1,
+            id: mode === 'edit' ? parseInt(productId) : Date.now(), // Use timestamp for unique ID
             name: document.getElementById('productName').value,
             category: document.getElementById('productCategory').value,
             price: parseFloat(document.getElementById('productPrice').value),
@@ -662,31 +677,69 @@ function setupEventListeners() {
             description: document.getElementById('productDescription').value
         };
 
+        // Validate required fields
+        if (!newProduct.name || !newProduct.category || newProduct.price <= 0) {
+            const errorMsg = currentLang === 'en'
+                ? 'Please fill in all required fields with valid values.'
+                : 'እባክዎ ሁሉንም አስፈላጊ መስኮች በሚገባ ይሙሉ።';
+            alert(errorMsg);
+            return;
+        }
+
         // Calculate value and status
         newProduct.value = newProduct.price * newProduct.stock;
         newProduct.status = newProduct.stock === 0 ? 'out-of-stock' :
             newProduct.stock <= newProduct.minStock ? 'low-stock' : 'in-stock';
 
         if (mode === 'edit') {
-            // Update existing product
-            const index = sampleProducts[currentLang].findIndex(p => p.id === parseInt(productId));
-            if (index !== -1) {
-                // Update in both languages to keep IDs consistent
-                sampleProducts.en[index] = { ...sampleProducts.en[index], ...newProduct, name: sampleProducts.en[index].name };
-                sampleProducts.am[index] = { ...sampleProducts.am[index], ...newProduct, name: sampleProducts.am[index].name };
+            // Update existing product in both languages
+            const indexEn = sampleProducts.en.findIndex(p => p.id === parseInt(productId));
+            const indexAm = sampleProducts.am.findIndex(p => p.id === parseInt(productId));
+
+            if (indexEn !== -1 && indexAm !== -1) {
+                // Keep original names for both languages
+                const originalNameEn = sampleProducts.en[indexEn].name;
+                const originalNameAm = sampleProducts.am[indexAm].name;
+
+                sampleProducts.en[indexEn] = {
+                    ...newProduct,
+                    name: originalNameEn,
+                    description: sampleProducts.en[indexEn].description
+                };
+                sampleProducts.am[indexAm] = {
+                    ...newProduct,
+                    name: originalNameAm,
+                    description: sampleProducts.am[indexAm].description
+                };
             }
         } else {
-            // Add new product (add to both languages with appropriate names)
-            // For demo, we'll add with same name in both languages
-            sampleProducts[currentLang].push(newProduct);
+            // Add new product - For demo, same name in both languages
+            // In real app, you'd have separate name fields for each language
+            sampleProducts.en.push(newProduct);
+            sampleProducts.am.push({
+                ...newProduct,
+                name: newProduct.name, // In real app, you'd ask for Amharic name
+                description: newProduct.description // In real app, you'd ask for Amharic description
+            });
         }
 
         closeModal();
+
+        // Reset save button to "Add" mode
+        saveBtn.textContent = currentLang === 'en' ? 'Save Product' : 'ምርቱን አስቀምጥ';
+        delete saveBtn.dataset.mode;
+        delete saveBtn.dataset.productId;
+
         loadProducts();
         updateStats();
         loadFeaturedProducts();
-    });
 
+        // Show success message
+        const successMsg = currentLang === 'en'
+            ? `Product ${mode === 'edit' ? 'updated' : 'added'} successfully!`
+            : `ምርቱ ${mode === 'edit' ? 'ተዘመነ' : 'ተጨመረ'}!`;
+        alert(successMsg);
+    });
     // Search input
     document.getElementById('searchInput').addEventListener('input', loadProducts);
 
@@ -694,10 +747,53 @@ function setupEventListeners() {
     document.getElementById('categoryFilter').addEventListener('change', loadProducts);
 
     // Export button
+    // Enhanced export function
     document.getElementById('exportBtn').addEventListener('click', function () {
-        alert(currentLang === 'en'
-            ? 'Export feature would download product data as CSV'
-            : 'የማውጫ ባህሪ የምርት መረጃዎችን እንደ CSV ያወርዳል');
+        // Create CSV content
+        const products = sampleProducts[currentLang];
+        let csvContent = 'data:text/csv;charset=utf-8,';
+
+        // Add headers
+        const headers = currentLang === 'en'
+            ? ['Product Name', 'Category', 'Price', 'Stock', 'Status', 'Value']
+            : ['የምርት ስም', 'ምድብ', 'ዋጋ', 'ክምችት', 'ሁኔታ', 'ዋጋ'];
+        csvContent += headers.join(',') + '\n';
+
+        // Add data rows
+        products.forEach(product => {
+            const status = product.stock === 0 ?
+                (currentLang === 'en' ? 'Out of Stock' : 'ክምችት አልቋል') :
+                product.stock <= product.minStock ?
+                    (currentLang === 'en' ? 'Low Stock' : 'ዝቅተኛ ክምችት') :
+                    (currentLang === 'en' ? 'In Stock' : 'በክምችት ላይ');
+
+            const row = [
+                `"${product.name}"`,
+                product.category,
+                product.price,
+                product.stock,
+                `"${status}"`,
+                product.value
+            ];
+            csvContent += row.join(',') + '\n';
+        });
+
+        // Create download link
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', 'inventory_export.csv');
+        document.body.appendChild(link);
+
+        // Trigger download
+        link.click();
+        document.body.removeChild(link);
+
+        // Show success message
+        const successMsg = currentLang === 'en'
+            ? 'Inventory exported successfully as CSV!'
+            : 'ክምችት በ CSV ፋይል ተላልፏል!';
+        alert(successMsg);
     });
 
     // Logout button
