@@ -29,12 +29,15 @@ let currentLang = localStorage.getItem('ethiostock_language') || 'en';
 
 // Recommended Ethiopian product images (free to use URLs)
 const productImages = [
-    'https://images.unsplash.com/photo-1579113800032-c38bd7635818?w=400&h=300&fit=crop', // Grains
-    'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop', // Coffee
-    'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop', // Spices
-    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop', // Ethiopian Food
-    'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=400&h=300&fit=crop', // Traditional
-    'https://images.unsplash.com/photo-1545235617-9465d2a55698?w=400&h=300&fit=crop'  // Market
+    'assets/white_teff.png', // Grains
+    'assets/coffee_image.png' ,//coffee
+    'assets/berber_spice_image.png', // Spices
+    'assets/ingera_image.png', // Ethiopian Food
+    'assets/habesha_kemis_image.png',  // Market
+    'assets/honey_image.png', // Traditional
+    'assets/shiro_powder_image.png',
+    'assets/basket.png'
+
 ];
 
 // Sample Ethiopian products data
@@ -122,7 +125,7 @@ const sampleProducts = {
             description: "Chickpea flour for traditional stew",
             status: "in-stock",
             value: 3400,
-            image: productImages[2]
+            image: productImages[6]
         },
         {
             id: 8,
@@ -134,7 +137,7 @@ const sampleProducts = {
             description: "Hand-woven Ethiopian basket",
             status: "in-stock",
             value: 4200,
-            image: productImages[4]
+            image: productImages[7]
         }
     ],
     am: [

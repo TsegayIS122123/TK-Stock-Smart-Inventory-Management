@@ -297,15 +297,15 @@ function setupEventListeners() {
 
     // Quick action buttons
     document.getElementById('addProductBtn').addEventListener('click', function () {
-        showMessage(currentLang === 'en' ? "Add Product feature" : "ምርት ማከል ባህሪ");
+        window.location.href = "inventory.html#addProductBtn";
     });
 
     document.getElementById('newSaleBtn').addEventListener('click', function () {
-        showMessage(currentLang === 'en' ? "New Sale feature" : "አዲስ ሽያጭ ባህሪ");
+       window.location.href="sales.html#newSalesBtn";
     });
 
     document.getElementById('viewReportsBtn').addEventListener('click', function () {
-        showMessage(currentLang === 'en' ? "View Reports feature" : "ሪፖርት ማየት ባህሪ");
+        window.location.href="reports.html";
     });
 
     document.getElementById('addCustomerBtn').addEventListener('click', function () {

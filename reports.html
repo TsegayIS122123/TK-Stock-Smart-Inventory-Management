@@ -170,10 +170,7 @@
                     </div>
                     
                     <div class="chart-container">
-                        <div class="chart-placeholder">
-                            <i class="fas fa-chart-bar chart-icon"></i>
-                            <p data-i18n="salesChartDesc">Monthly Sales Trend Chart</p>
-                        </div>
+                        <canvas id="salesChart"></canvas>
                     </div>
                     
                     <div class="table-container">
@@ -206,10 +203,7 @@
                     </div>
                     
                     <div class="chart-container">
-                        <div class="chart-placeholder">
-                            <i class="fas fa-chart-pie chart-icon"></i>
-                            <p data-i18n="inventoryChartDesc">Inventory Distribution by Category</p>
-                        </div>
+                        <canvas id="inventoryChart"></canvas>
                     </div>
                     
                     <div class="table-container">
@@ -241,10 +235,7 @@
                     </div>
                     
                     <div class="chart-container">
-                        <div class="chart-placeholder">
-                            <i class="fas fa-chart-line chart-icon"></i>
-                            <p data-i18n="profitChartDesc">Monthly Profit Trend</p>
-                        </div>
+                        <canvas id="profitChart"></canvas>
                     </div>
                     
                     <div class="table-container">
@@ -276,10 +267,7 @@
                     </div>
                     
                     <div class="chart-container">
-                        <div class="chart-placeholder">
-                            <i class="fas fa-user-friends chart-icon"></i>
-                            <p data-i18n="customerChartDesc">Customer Distribution by Region</p>
-                        </div>
+                        <canvas id="customerChart"></canvas>
                     </div>
                     
                     <div class="table-container">
@@ -337,6 +325,8 @@
         <p class="developers" data-i18n="developers">Developed by: Tsegay & Kasa</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/chart.js"></script>
     <script src="JS/reports.js"></script>
 </body>
 </html>
