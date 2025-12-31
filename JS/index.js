@@ -79,7 +79,7 @@ const translations = {
         addCustomer: "Add Customer",
         recentActivity: "Recent Sales Activity",
         viewAll: "View All",
-        customer: "Customer",
+        aboutSystem: "About System", 
         date: "Date",
         items: "Items",
         amount: "Amount",
@@ -126,7 +126,7 @@ const translations = {
         addProduct: "ምርት ጨምር",
         newSale: "አዲስ ሽያጭ",
         viewReports: "ሪፖርት አሳይ",
-        addCustomer: "ደንበኛ ጨምር",
+        aboutSystem: "ስለ ስርዓቱ", 
         recentActivity: "የቅርብ ሽያጭ እንቅስቃሴ",
         viewAll: "ሁሉንም አሳይ",
         customer: "ደንበኛ",
@@ -308,9 +308,9 @@ function setupEventListeners() {
         window.location.href="reports.html";
     });
 
-    document.getElementById('addCustomerBtn').addEventListener('click', function () {
+    document.getElementById('aboutSystemBtn').addEventListener('click', function () {
         // Navigate to settings or specific customer page
-        window.location.href = 'settings.html?tab=customers';
+        window.location.href = 'settings.html?tab=about';
     });
     // View all links
     document.querySelectorAll('.view-all').forEach((link, index) => {
