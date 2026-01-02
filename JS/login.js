@@ -90,6 +90,7 @@ const rememberCheckbox = document.getElementById('remember');
 const loginBtn = document.getElementById('loginBtn');
 const forgotLink = document.getElementById('forgotLink');
 const supportLink = document.getElementById('supportLink');
+ const errorText = document.getElementById("passwordError");
 
 // Email validation
 function isValidEmail(email) {
@@ -112,10 +113,15 @@ loginForm.addEventListener('submit', function (event) {
     }
 
     // Validate password
-    if (password.length < 6) {
-        alert('Password must be at least 6 characters long.');
-        passwordInput.focus();
-        return;
+    if (password.length < 6 && password.length > 0) {
+      errorText.style.display = "block";
+      this.classList.add("input-error");
+      passwordInput.focus();
+      return;
+    } else {
+      // Hide error
+      errorText.style.display = "none";
+      this.classList.remove("input-error");
     }
 
     // Show loading state

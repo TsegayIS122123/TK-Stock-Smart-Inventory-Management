@@ -272,6 +272,15 @@ body {
     font-weight: 600;
     margin-top: 10px;
 }
+.error-message {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 5px;
+    display: none; /* Hide by default */
+  }
+  .input-error {
+    border-color: red;
+  }
 
 /* Responsive Design */
 @media (max-width: 768px) {
