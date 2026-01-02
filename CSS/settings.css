@@ -1035,7 +1035,7 @@ input:checked+.toggle-slider:before {
     font-size: 14px;
 }
 
-/* Acknowledgement */
+/* Acknowledgement  */
 .acknowledgement {
     background: linear-gradient(135deg, rgba(52, 152, 219, 0.05), rgba(46, 204, 113, 0.05));
     border-radius: 10px;
@@ -1066,7 +1066,7 @@ input:checked+.toggle-slider:before {
     font-size: 16px;
 }
 
-/* Notification */
+Notification
 .notification {
     position: fixed;
     top: 20px;
